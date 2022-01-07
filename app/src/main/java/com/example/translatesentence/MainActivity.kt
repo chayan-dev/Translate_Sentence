@@ -32,30 +32,37 @@ class MainActivity : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+        var flag= true
         spinner.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
-                when {
-                    adapterView?.getItemAtPosition(position)==0 -> {
-                        //show english
-                        showEnglishText()
-                    }
-                    adapterView?.getItemAtPosition(position)==1 -> {
-                        //show bengali
-                        showBengaliText()
-                    }
-                    adapterView?.getItemAtPosition(position)==2 -> {
-                        //spanish
-                        showSpanishText()
-                    }
-                    else -> {
-                        //german
-                        showGermanText()
+                if(flag){
+                    showEnglishText()
+                    flag=false
+                }
+                else {
+                    when (position) {
+                        0 -> {
+                            //show english
+                            showEnglishText()
+                        }
+                        1 -> {
+                            //show bengali
+                            showBengaliText()
+                        }
+                        2 -> {
+                            //spanish
+                            showSpanishText()
+                        }
+                        else -> {
+                            //german
+                            showGermanText()
+                        }
                     }
                 }
 
                 Toast.makeText(this@MainActivity,
-                    "selected ${adapterView?.getItemAtPosition(position).toString() }",
+                    " ${adapterView?.getItemAtPosition(position).toString() } selected",
                     Toast.LENGTH_SHORT).show()
             }
 
